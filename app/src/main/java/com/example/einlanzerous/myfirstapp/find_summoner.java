@@ -14,8 +14,12 @@ import org.json.JSONObject;
 
 class find_summoner extends AsyncTask<String, Void, String> {
 
-    private static final String riotDev = System.getenv("RIOT_DEV");
     private String TAG = MainActivity.class.getSimpleName();
+
+    private String summonerName = "";
+    private double summonerScore = 0;
+    private int summonerKills = 0;
+    private int summonerDeaths = 0;
 
     private TextView textView;
 
@@ -26,28 +30,30 @@ class find_summoner extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        textView.setText("Asscessing Summoner Information");
+        textView.setText("Accessing Summoner Information");
+
     }
 
     @Override
     protected String doInBackground(String... strings) {
         HttpHandler grab = new HttpHandler();
 
-        //String url = "https://na.api.riotgames.com/api/lol/NA/v2.2/match/2464506643?api_key=RGAPI-825f93dd-bf9e-4bdc-acd7-690bc2ba0669";
         String url = "https://api.mlab.com/api/1/databases/seniorproject/collections/summoners?apiKey=zMgb9JjJAAXubWeCZVQGWOFaEzAcPT8h";
         String jsonStr = grab.makeServiceCall(url);
 
-        Log.e(TAG, "Response from url request: " + jsonStr);
+        //Log.e(TAG, "Response from url request: " + jsonStr);
 
         if (jsonStr != null) {
             try {
-                JSONObject jsonObj = new JSONObject(jsonStr);
+                JSONArray summonerInfo = new JSONArray(jsonStr);
+                JSONObject summonerDetails = summonerInfo.getJSONObject(0);
 
-                JSONArray summonerInfo = jsonObj.getJSONArray("summonerInfo");
+                summonerName = summonerDetails.getString("summoner");
+                summonerScore = summonerDetails.getDouble("score");
+                summonerKills = summonerDetails.getInt("kills");
+                summonerDeaths = summonerDetails.getInt("deaths");
 
-                for (int i = 0; i < summonerInfo.length(); i++){
-
-                }
+                Log.e(TAG, "Name attempt is: " + summonerName + " | with a score of: " + summonerScore + " with " + summonerKills + " kills.");
             } catch (final JSONException e) {
                 Log.e(TAG, "JSON parsing error: " + e.getMessage());
             }
@@ -58,6 +64,6 @@ class find_summoner extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String temp) {
-        textView.setText("Did it work? " + temp);
+        textView.setText("Did it work? " + temp + "\nLooked up " + summonerName +"\n Found score of: " + summonerScore);
     }
 }

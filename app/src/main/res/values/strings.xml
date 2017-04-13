@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LCS Fantasy</string>
-    <string name="edit_message">Enter Message</string>
-    <string name="button_send">Send</string>
+    <string name="app_name">Challengers Only</string>
+    <string name="edit_message">Enter Your Summoner Name</string>
+    <string name="button_send">Go</string>
 </resources>
