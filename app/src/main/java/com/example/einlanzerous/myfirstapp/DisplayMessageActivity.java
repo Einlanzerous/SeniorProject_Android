@@ -14,12 +14,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(message);
-
         TextView textView2 = (TextView) findViewById(R.id.textView2);
-        new find_summoner(textView2).execute("test");
+        textView2.setText("Summoner: " + message);
 
-
+        TextView textView = (TextView) findViewById(R.id.textView);
+        new find_summoner(textView, message).execute("test");
     }
 }
