@@ -17,9 +17,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        EditText editText = (EditText) findViewById(R.id.summoner1);
+        EditText summoner2 = (EditText) findViewById(R.id.summoner2);
+        String primarySummoner = editText.getText().toString();
+        String secondarySummoner = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, primarySummoner);
         startActivity(intent);
     }
 }

@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-        <EditText android:id="@+id/edit_message"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/lol_background">
+
+        <EditText
+            android:id="@+id/summoner1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/summoner2"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:background="@android:drawable/alert_dark_frame"
             android:hint="@string/edit_message" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="sendMessage"
-        android:text="@string/button_send" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="235dp"
+            android:onClick="sendMessage"
+            android:text="@string/button_send"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/summoner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button"
+            android:layout_alignParentStart="true"
+            android:background="@android:drawable/alert_dark_frame"
+            android:ems="10"
+            android:hint="Enter Competing Summoner Name"
+            android:inputType="textPersonName" />
+
+    </RelativeLayout>
+
 </LinearLayout>
