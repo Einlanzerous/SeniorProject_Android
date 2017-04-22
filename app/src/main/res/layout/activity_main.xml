@@ -21,7 +21,8 @@
             android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:background="@android:drawable/alert_dark_frame"
-            android:hint="@string/edit_message" />
+            android:hint="@string/edit_message"
+            android:singleLine="true" />
 
         <Button
             android:id="@+id/button"
@@ -42,7 +43,8 @@
             android:background="@android:drawable/alert_dark_frame"
             android:ems="10"
             android:hint="Enter Competing Summoner Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:singleLine="true" />
 
     </RelativeLayout>
 

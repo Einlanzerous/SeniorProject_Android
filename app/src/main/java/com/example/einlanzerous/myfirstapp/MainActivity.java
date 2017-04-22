@@ -8,6 +8,8 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.einlanzerous.myfirstapp.MESSAGE";
+    public static String secondarySummoner;
+    public static String primarySummoner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +19,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.summoner1);
+        Bundle summoners = new Bundle();
+
+        EditText summoner = (EditText) findViewById(R.id.summoner1);
         EditText summoner2 = (EditText) findViewById(R.id.summoner2);
-        String primarySummoner = editText.getText().toString();
-        String secondarySummoner = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, primarySummoner);
+
+        primarySummoner = summoner.getText().toString();
+        secondarySummoner = summoner2.getText().toString();
+
+        summoners.putString("FirstSummoner", primarySummoner);
+        summoners.putString("SecondSummoner", secondarySummoner);
+
+        intent.putExtras(summoners);
+        //intent.putExtra(EXTRA_MESSAGE, primarySummoner);
         startActivity(intent);
     }
 }

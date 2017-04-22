@@ -13,11 +13,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_message);
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        TextView textView2 = (TextView) findViewById(R.id.textView2);
-        textView2.setText("Summoner: " + message);
+        Bundle summoners = intent.getExtras();
 
+        String summoner1 = summoners.getString("FirstSummoner");
+        String summoner2 = summoners.getString("SecondSummoner");
+
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
         TextView textView = (TextView) findViewById(R.id.textView);
-        new find_summoner(textView, message).execute("test");
+        new find_summoner(textView, summoner1).execute("test");
+        TextView secondaryView = (TextView) findViewById(R.id.textView3);
+        new find_summoner(secondaryView, summoner2).execute("test");
+
+        textView2.setText(summoner1 + " versus " + summoner2);
     }
 }

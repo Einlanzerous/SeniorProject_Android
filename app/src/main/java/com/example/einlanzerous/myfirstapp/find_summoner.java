@@ -64,14 +64,16 @@ class find_summoner extends AsyncTask<String, Void, String> {
         if (jsonStr != null) {
             try {
                 JSONArray summonerInfo = new JSONArray(jsonStr);
+                Log.e(TAG, "Looking for: " + this.summonerName);
 
                 for (int i = 0; i < summonerInfo.length(); i++){
                     JSONObject verifySummoner = summonerInfo.getJSONObject(i);
                     String testName = verifySummoner.getString("summoner").toLowerCase();
 
-                    if (testName.equals(summonerName.toLowerCase())){
+                    if (testName.equalsIgnoreCase(summonerName)){
                         Log.e(TAG, "Found summoner at index: " + i);
                         firstSummonerIndex = i;
+                        break;
                     }
                 }
 
@@ -96,13 +98,18 @@ class find_summoner extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String temp) {
-        textView.setText("Successful data pull? " + temp + "\nLooked up " + summonerName +
-                "\nFound score of: " + summonerScore + "\nBased on;\n\tKills: " + summonerKills +
-                "\n\tDeaths: " + summonerDeaths + "\n\tAssists: " + summonerAssists +
-                "\n\tCS per Game: " + summonerCSPG + "\n\tCS per minute: " + summonerCSPM +
-                "\n\tDouble Kills: " + summonerDbl + "\n\tTriple Kills: " + summonerTrp +
-                "\n\tQuadra Kills: " + summonerQuad + "\n\tPenta Kills: " + summonerPenta +
-                "\n\tMatches polled: " + summonerMP + "\n\tAverage Time: " + summonerTime);
+        if (firstSummonerIndex < 0) {
+            textView.setText("Error looking up " + summonerName + ", not found in database.");
+        }
+        else {
+            textView.setText("Looked up " + summonerName +
+                    "\nFound score of: " + summonerScore + "\nBased on;\n\tKills: " + summonerKills +
+                    "\n\tDeaths: " + summonerDeaths + "\n\tAssists: " + summonerAssists +
+                    "\n\tCS per Game: " + summonerCSPG + "\n\tCS per minute: " + summonerCSPM +
+                    "\n\tDouble Kills: " + summonerDbl + "\n\tTriple Kills: " + summonerTrp +
+                    "\n\tQuadra Kills: " + summonerQuad + "\n\tPenta Kills: " + summonerPenta +
+                    "\n\tMatches polled: " + summonerMP + "\n\tAverage Time: " + summonerTime);
+        }
     }
 
     public JSONObject generateSummonerStats(int summonerIndex, JSONArray summonerInfo) {
